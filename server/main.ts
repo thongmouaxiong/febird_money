@@ -1,7 +1,8 @@
-import { Router } from "express";
+import { Request, Response, Router } from "express";
 import { Cloudinary } from "./cores/configs/cloudinary";
 import { ConnectDatabase } from "./cores/configs/database";
 import { UserService } from "./cores/services/user.service";
+import { UserFeature } from "./features/user";
 
 export class Main {
   private databaseURL = process.env.DATABASE_URL;
@@ -9,9 +10,10 @@ export class Main {
   private cloudinaryKey = process.env.CLOUDINARY_API_KEY;
   private cloudinarySecret = process.env.CLOUDINARY_API_SECRET;
   private SECRET_KEY: string = process.env.SECRET_KEY;
+  private REPLACE_KEY: string = process.env.REPLACE_KEY;
   private SALT_I: number = parseInt(process.env.SALT);
   constructor(router: Router) {
-    // config 
+    // config
     new ConnectDatabase(this.databaseURL);
     new Cloudinary(
       this.cloudinaryName,
@@ -19,11 +21,14 @@ export class Main {
       this.cloudinarySecret
     );
 
-    // server services
-    UserService.getInstance(this.SECRET_KEY, this.SALT_I);
+    // server's services
+    UserService.getInstance(this.SECRET_KEY, this.SALT_I, this.REPLACE_KEY);
 
-    // server models
-
-    // server routers
+    // test api
+    router.use("/test", (req: Request, res: Response) => {
+      res.status(200).send("Server api is working.");
+    });
+    // server's features
+    new UserFeature(router);
   }
 }
