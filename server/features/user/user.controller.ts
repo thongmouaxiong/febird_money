@@ -85,6 +85,16 @@ export class UserController {
     }
   }
 
+  async getUserInfo(req: Request, res: Response) {
+    try {
+      const user = res.locals.user as IUser
+      SendResponse.success(res, EMessage.GetUserInfoSuccess, user);
+    } catch (err) {
+      console.log("getUserInfo error => ", err);
+      SendResponse.error(res, EErrorMessage.ServerError, err);
+    }
+  }
+
   async getUserMany(req: Request, res: Response) {
     try {
       const users = await this.userModel.find({
