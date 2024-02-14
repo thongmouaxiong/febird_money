@@ -3,6 +3,7 @@ import { Cloudinary } from "./cores/configs/cloudinary";
 import { ConnectDatabase } from "./cores/configs/database";
 import { UserService } from "./cores/services/user.service";
 import { UserFeature } from "./features/user";
+import { TagFeuture } from "./features/tag";
 
 export class Main {
   private databaseURL = process.env.DATABASE_URL;
@@ -28,7 +29,9 @@ export class Main {
     router.use("/test", (req: Request, res: Response) => {
       res.status(200).send("Server api is working.");
     });
+    
     // server's features
     new UserFeature(router);
+    new TagFeuture(router);
   }
 }

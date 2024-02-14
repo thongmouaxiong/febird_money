@@ -47,6 +47,12 @@ const userSchema = new Schema<IUser, Model<IUser>>(
   }
 );
 
+userSchema.pre('save', function(next){
+  // the uuid remember last generate so we want to generate new one
+  this.uuid = uuidV4()
+  next()
+})
+
 export class UserModel {
   private tableName: string;
 
