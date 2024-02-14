@@ -9,4 +9,7 @@ export enum EMessage {
   GetTagByIdSuccess = "Get Tag By Id Success.",
   DeleteTagSuccess = "Delete Tag Success.",
   SearchTagSuccess = "Search Tag Success.",
+  GetExpenseByIdSuccess = "Get Expense By Id Success.",
+  DeleteExpenseSuccess = "Delete Expense Success.",
+  GetExpenseManySuccess = "Get Expense Many Success."
 }

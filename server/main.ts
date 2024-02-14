@@ -4,6 +4,8 @@ import { ConnectDatabase } from "./cores/configs/database";
 import { UserService } from "./cores/services/user.service";
 import { UserFeature } from "./features/user";
 import { TagFeuture } from "./features/tag";
+import { ExpenseFeuture } from "./features/expense";
+import { SumMoneyService } from "./cores/services/sum.service";
 
 export class Main {
   private databaseURL = process.env.DATABASE_URL;
@@ -24,6 +26,7 @@ export class Main {
 
     // server's services
     UserService.getInstance(this.SECRET_KEY, this.SALT_I, this.REPLACE_KEY);
+    SumMoneyService.getInstance();
 
     // test api
     router.use("/test", (req: Request, res: Response) => {
@@ -33,5 +36,6 @@ export class Main {
     // server's features
     new UserFeature(router);
     new TagFeuture(router);
+    new ExpenseFeuture(router);
   }
 }

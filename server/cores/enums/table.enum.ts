@@ -2,6 +2,6 @@ export enum ETable {
   user = "User",
   earn = "Earn",
   income = "Income",
-  expenditure = "Expense",
+  expense = "Expense",
   tag = "Tag",
 }

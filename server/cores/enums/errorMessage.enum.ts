@@ -3,5 +3,6 @@ export enum EErrorMessage {
   RequiredPassword = "Required Password !",
   InvalidUsernameOrPassword = "Invalid Username Or Password !",
   TokenNotFound = "Token Not Found !",
-  InvalidToken = "Invalid Token !"
+  InvalidToken = "Invalid Token !",
+  InvalidMoney = "Invalid Money ! Please input money more then 0."
 }
